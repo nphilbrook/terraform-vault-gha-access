@@ -22,9 +22,9 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [vault_jwt_auth_backend_role.int_gha_role](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/jwt_auth_backend_role) | resource |
-| [vault_policy.int_gha_policy](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/policy) | resource |
-| [vault_policy_document.int_gha_policy](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/data-sources/policy_document) | data source |
+| [vault_jwt_auth_backend_role.gha_role](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/jwt_auth_backend_role) | resource |
+| [vault_policy.gha_policy](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/policy) | resource |
+| [vault_policy_document.gha_policy](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/data-sources/policy_document) | data source |
 
 ## Inputs
 
@@ -33,6 +33,7 @@ No modules.
 | <a name="input_github_organization"></a> [github\_organization](#input\_github\_organization) | GitHub organization for GHA OIDC bound\_audiences and subject claim. | `string` | n/a | yes |
 | <a name="input_github_repositories"></a> [github\_repositories](#input\_github\_repositories) | List of GitHub repositories for the bound\_claims subject. Globs are allowed. | `list(string)` | n/a | yes |
 | <a name="input_jwt_backend_path"></a> [jwt\_backend\_path](#input\_jwt\_backend\_path) | Path to the Vault JWT auth backend. | `string` | n/a | yes |
+| <a name="input_role_name"></a> [role\_name](#input\_role\_name) | Name of the Vault JWT auth backend role. Must be unique within the JWT backend. | `string` | n/a | yes |
 | <a name="input_vault_namespace_path"></a> [vault\_namespace\_path](#input\_vault\_namespace\_path) | Vault namespace for resources. | `string` | `null` | no |
 | <a name="input_workflow"></a> [workflow](#input\_workflow) | GitHub Actions workflow name for bound\_claims.workflow. If null, any workflow will be authorized. | `string` | `null` | no |
 
