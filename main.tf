@@ -1,3 +1,4 @@
+
 resource "vault_jwt_auth_backend_role" "int_gha_role" {
   namespace         = var.vault_namespace_path
   backend           = var.jwt_backend_path
@@ -6,7 +7,7 @@ resource "vault_jwt_auth_backend_role" "int_gha_role" {
   bound_claims_type = "glob"
   bound_claims = {
     sub                = join(",", [for repo in var.github_repositories : "repo:${var.github_organization}/${repo}"])
-    workflow           = "retrieve-vault"
+    workflow           = var.workflow
     runner_environment = "self-hosted"
   }
   user_claim     = "sub"
