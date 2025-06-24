@@ -2,7 +2,7 @@
 resource "vault_jwt_auth_backend_role" "int_gha_role" {
   namespace         = var.vault_namespace_path
   backend           = var.jwt_backend_path
-  role_name         = "gha-workflow"
+  role_name         = var.role_name
   bound_audiences   = ["https://github.com/${var.github_organization}"]
   bound_claims_type = "glob"
   bound_claims = {
@@ -36,3 +36,4 @@ data "vault_policy_document" "int_gha_policy" {
     description  = "Read nonprod kv secrets"
   }
 }
+

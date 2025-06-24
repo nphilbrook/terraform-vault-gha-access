@@ -24,3 +24,8 @@ variable "workflow" {
   type        = string
   default     = null
 }
+
+variable "role_name" {
+  description = "Name of the Vault JWT auth backend role. Must be unique within the JWT backend."
+  type        = string
+}
