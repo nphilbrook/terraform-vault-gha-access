@@ -25,16 +25,22 @@ resource "vault_policy" "gha_policy" {
 }
 
 data "vault_policy_document" "gha_policy" {
-  rule {
-    path         = "prod/kv/*"
-    capabilities = ["read"]
-    description  = "Read prod kv secrets"
+  dynamic "rule" {
+    for_each = var.read_paths
+    content {
+      path         = rule.value
+      capabilities = ["read"]
+      description  = "Read access to ${rule.value}"
+    }
   }
 
-  rule {
-    path         = "nonprod/kv/*"
-    capabilities = ["read"]
-    description  = "Read nonprod kv secrets"
+  dynamic "rule" {
+    for_each = var.write_paths
+    content {
+      path         = rule.value
+      capabilities = ["create", "read", "update", "delete"]
+      description  = "Write access to ${rule.value}"
+    }
   }
 }
 

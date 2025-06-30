@@ -29,3 +29,15 @@ variable "role_name" {
   description = "Name of the Vault JWT auth backend role. Must be unique within the JWT backend."
   type        = string
 }
+
+variable "read_paths" {
+  description = "List of Vault paths for read access. Each path should include wildcards as needed (e.g., 'prod/kv/*')."
+  type        = list(string)
+  default     = []
+}
+
+variable "write_paths" {
+  description = "List of Vault paths for write access. Each path should include wildcards as needed (e.g., 'nonprod/kv/*')."
+  type        = list(string)
+  default     = []
+}
