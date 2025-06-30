@@ -1,3 +1,6 @@
+locals {
+  create_policy = length(var.read_paths) > 0 || length(var.write_paths) > 0
+}
 
 resource "vault_jwt_auth_backend_role" "gha_role" {
   namespace = var.vault_namespace_path
@@ -15,11 +18,12 @@ resource "vault_jwt_auth_backend_role" "gha_role" {
   role_type      = "jwt"
   token_ttl      = 300
   token_type     = "service"
-  token_policies = [vault_policy.gha_policy.name]
+  token_policies = local.create_policy ? [vault_policy.gha_policy[0].name] : null
 }
 
 resource "vault_policy" "gha_policy" {
   namespace = var.vault_namespace_path
+  count     = local.create_policy ? 1 : 0
   name      = "${var.role_name}-policy"
   policy    = data.vault_policy_document.gha_policy.hcl
 }
