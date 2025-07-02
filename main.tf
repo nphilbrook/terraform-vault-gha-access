@@ -14,7 +14,7 @@ resource "vault_jwt_auth_backend_role" "gha_role" {
     workflow           = var.workflow
     runner_environment = "self-hosted"
   }
-  user_claim     = "sub"
+  user_claim     = "repository"
   role_type      = "jwt"
   token_ttl      = 300
   token_type     = "service"
